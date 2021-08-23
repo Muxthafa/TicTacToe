@@ -28,6 +28,31 @@ public class TicTacToe {
 		}
 	}
 	
+	/*@method doToss identifies who to make the move first
+	 * player chooses head or tail
+	 * checked against the toss output
+	 */
+	
+	public static void doToss()
+	{
+		System.out.println("Your choice? \n 0.Head\n 1.Tail");
+		int player_choice=sc.nextInt();		// 0 for head and 1 for tail
+		
+		int toss_output=rand.nextInt(2);						
+		if(player_choice==toss_output)
+		{
+			System.out.println("Its player's turn!!!");
+			who='p';
+			
+		}
+		else
+		{
+			System.out.println("Its computer's turn!!!");
+			who='c';
+		}
+		
+	}
+	
 	/*@method to get input value X or O from the player
 	 * computers choose random number either 0('X') or 1('O') 
 	 */
@@ -73,11 +98,17 @@ public class TicTacToe {
 	 */
 	public static void setLocation()
 	{	
-		loc=sc.nextInt();
-		if(loc<1 || loc>9)
+		if(who == 'c')
 		{
-			System.out.println("Please enter the location value between 1 and 9!!");
-			setLocation();			//call to itself to take correct value	
+			loc = rand.nextInt(9)+1;		//computer selects random values from 1 to 9;
+		}
+		else {
+			loc=sc.nextInt();
+			if(loc<1 || loc>9)
+			{
+				System.out.println("Please enter the location value between 1 and 9!!");
+				setLocation();			//call to itself to take correct value	
+			}
 		}
 		
 	}
@@ -103,8 +134,8 @@ public class TicTacToe {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		createBoard();				//function call to createBoard
-		who='p';					//starts with player
+		createBoard();	//function call to createBoard
+		doToss();		//function call to do a toss
 		getInput();   //function call as to enter either 'X' or 'O'
 		displayBoard(); //function call to display board
 		System.out.println("Enter the cell number (1 to 9) to make the move: ");
