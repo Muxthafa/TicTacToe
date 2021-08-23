@@ -77,9 +77,28 @@ public class TicTacToe {
 		if(loc<1 || loc>9)
 		{
 			System.out.println("Please enter the location value between 1 and 9!!");
-			setLocation();			//call to same function to take correct value	
+			setLocation();			//call to itself to take correct value	
 		}
 		
+	}
+	
+	/*@method checkSpace checks for the available space
+	 * Use case 5 to check for the desired location
+	 * to make the move
+	 */
+	public static void checkSpace()
+	{
+		if(board[loc]==' ')					//condition to check for free space
+		{
+			board[loc]=letter;
+		}
+		else
+		{
+			System.out.println("Entered cell number is already occupied! please enter valid index number:");
+			setLocation();					//function call to setLocation method to enter the correct index
+			checkSpace();					//call to itself
+		}
+		displayBoard();
 	}
 	
 	public static void main(String[] args) {
@@ -89,7 +108,8 @@ public class TicTacToe {
 		getInput();   //function call as to enter either 'X' or 'O'
 		displayBoard(); //function call to display board
 		System.out.println("Enter the cell number (1 to 9) to make the move: ");
-		setLocation();
+		setLocation();	//function call to select the index value to store X OR O
+		checkSpace(); 	//function call to check for valid space
 	}
 
 }
