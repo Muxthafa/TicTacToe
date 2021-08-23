@@ -27,13 +27,13 @@ public class TicTacToe {
 	}
 	
 	/*@method to get input value X or O from the player
-	 * computers choose random number either 0('X') or 1('0') 
+	 * computers choose random number either 0('X') or 1('O') 
 	 */
 	public static void getInput()
 	{
 		if(who=='p')
 		{
-			System.out.println("Enter the input(X or O): ");
+			System.out.println("Enter the input either X or O: ");
 			letter=sc.next().charAt(0);
 		}
 		else
@@ -46,11 +46,33 @@ public class TicTacToe {
 		
 	}
 	
+	/*@method displayBoard to display the board in cell format
+	 * this is use case 3 which allows player to make a move
+	 */
+	public static void displayBoard()
+	{
+		System.out.println("|-----------|");
+        System.out.println("| " + board[1] + " | "
+                           + board[2] + " | " + board[3]		//row 1
+                           + " |");							
+        System.out.println("|-----------|");
+        System.out.println("| " + board[4] + " | "
+                           + board[5] + " | " + board[6]		//row 2
+                           + " |");							
+        System.out.println("|-----------|");
+        System.out.println("| " + board[7] + " | "
+                           + board[8] + " | " + board[9]		//row 3
+                           + " |");							
+        System.out.println("|-----------|");
+	}
+	
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		createBoard();				//function call to createBoard
 		who='p';					//starts with player
 		getInput();   //function call as to enter either 'X' or 'O'
+		displayBoard(); //function call to display board
 	}
 
 }
