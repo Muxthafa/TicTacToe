@@ -1,20 +1,16 @@
 package com.bridgelabz;
 
 public class TicTacToe {
-	
-	TicTacToe()		//constructor
-	{
-		System.out.println("welcome to java workshop!!");
-	}
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		char[] num = new char[10];
-		for(int i=1;i<num.length;i++)
+	static char[] num = new char[10];		//char array with size 10
+	public static void board() {
+		for(int i=1;i<num.length;i++)	//loop to add spaces to char array
 		{
 			num[i]=' ';
 		}
-		TicTacToe board=new TicTacToe();	//object creation
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		board();
 	}
 
 }
