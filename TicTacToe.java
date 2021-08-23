@@ -13,6 +13,8 @@ public class TicTacToe {
 	
 	public static char who; 			//this variable checks whose turn to play either 'p'-player or 'c'-computer
 	
+	public static int loc; //to store cell number on the board(1 to 9)
+	
 	static char[] board = new char[10];		//char array with size 10
 	
 	/*@method createBoard to initialize array
@@ -66,6 +68,19 @@ public class TicTacToe {
         System.out.println("|-----------|");
 	}
 	
+	/*@method selects the value from 1 to 9 
+	 * function executes again if the value is not between 1 to 9
+	 */
+	public static void setLocation()
+	{	
+		loc=sc.nextInt();
+		if(loc<1 || loc>9)
+		{
+			System.out.println("Please enter the location value between 1 and 9!!");
+			setLocation();			//call to same function to take correct value	
+		}
+		
+	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -73,6 +88,8 @@ public class TicTacToe {
 		who='p';					//starts with player
 		getInput();   //function call as to enter either 'X' or 'O'
 		displayBoard(); //function call to display board
+		System.out.println("Enter the cell number (1 to 9) to make the move: ");
+		setLocation();
 	}
 
 }
