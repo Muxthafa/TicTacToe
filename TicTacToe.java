@@ -115,7 +115,8 @@ public class TicTacToe {
 	{	
 		if(who == 'c')
 		{
-			loc = rand.nextInt(9)+1;		//computer selects random values from 1 to 9;
+			cTurn();					//function which contains computers playing conditions
+				
 		}
 		else {
 			loc=sc.nextInt();
@@ -148,6 +149,61 @@ public class TicTacToe {
 	}
 	
 	
+	public static void cTurn()
+	{
+		System.out.println("Computer is playing!!!");	
+		if((board[1]==' ')&&(board[2]==board[3]&&board[2]==letter)||(board[4]==board[7]&&board[4]==letter)||(board[5]==board[9]&&board[5]==letter))
+		{
+			board[1]=letter;			
+		}
+		else if((board[2]==' ')&&(board[1]==board[3]&&board[3]==letter)||(board[5]==board[8]&&board[8]==letter))
+		{
+			board[2]=letter;
+		}
+		else if((board[3]==' ')&&(board[1]==board[2]&&board[2]==letter)||(board[6]==board[9]&&board[9]==letter)||(board[5]==board[7]&&board[7]==letter))
+		{
+			board[3]=letter;
+		}
+		else if((board[4]==' ')&&(board[1]==board[7]&&board[1]==letter)||(board[5]==board[6]&&board[6]==letter))
+		{
+			board[4]=letter;
+		}
+		else if((board[5]==' ')&&(board[1]==board[9]&&board[2]==letter)||(board[7]==board[3]&&board[7]==letter)||(board[2]==board[8]&&board[8]==letter)||(board[4]==board[6]&&board[6]==letter))
+		{
+			board[5]=letter;
+		}
+		else if((board[6]==' ')&&(board[9]==board[3]&&board[3]==letter)||(board[5]==board[4]&&board[4]==letter))
+		{
+			board[6]=letter;
+		}
+		else if((board[7]==' ')&&(board[1]==board[4]&&board[4]==letter)||(board[3]==board[5]&&board[3]==letter)||(board[8]==board[9]&&board[8]==letter))
+		{
+			board[3]=letter;
+		}
+		else if((board[8]==' ')&&(board[9]==board[7]&&board[7]==letter)||(board[2]==board[5]&&board[2]==letter))
+		{
+			board[8]=letter;
+		}
+		else if((board[9]==' ')&&(board[1]==board[5]&&board[5]==letter)||(board[6]==board[3]&&board[3]==letter)||(board[8]==board[7]&&board[7]==letter))
+		{
+			board[9]=letter;
+		}
+	   	else {
+			randomSelect();			
+		}
+		displayBoard();
+	}
+	
+	public static void randomSelect()				//to randomly select index
+	{
+		int loc=rand.nextInt(9)+1;
+		if(board[loc]==' ')
+			board[loc]=letter;
+		else
+			randomSelect();
+	}
+	
+	
 	/*@method to check for winner
 	 * checks different cases to determine the winner
 	 * if there is a "XXX" OR "OOO" 
@@ -155,12 +211,10 @@ public class TicTacToe {
 	 */
 	public static void winnerExists()
     {
-		
-		//to check if there is an winning situation
+		String match = null;
+		//iterating to all the cells to check if there is a winning moment
         for (int a = 1; a < 9; a++) 
         {
-            String match = null;
-  
             switch (a) {
             case 1:
                 match = ""+board[1] + board[2] + board[3];
@@ -187,10 +241,16 @@ public class TicTacToe {
                 match = ""+board[3] + board[5] + board[7];
                 break;
             }
-            //For  winner
-            if (match.equals("XXX")||match.equals("OOO")) {
+            
+            if (match.equals("XXX")) {			// to determine winner if the match equals either "XXX" or "OOO"
                 winner="yes";
+                break;
             }
+            if (match.equals("OOO")) {
+                winner="yes";
+                break;
+            }
+            
         }
         int i;
         for(i=1;i<board.length;i++)
@@ -198,16 +258,16 @@ public class TicTacToe {
         	if(board[i]==' ')
         		break;
         }
-        if(i==10)
-        	winner="draw";
+        
         if(winner=="yes")						//condition to check for winner
 		{
 			System.out.println("Winner is: "+winnerIs());
+			System.exit(0);
 		}
-		else if(winner=="draw")								//condition to check for tie
-		{
-			System.out.println( "It's a draw!");
-		}
+        else if(i==10) {
+        	winner="draw";	
+        }
+        
 		else													//if none of conditions determine the winner then change the turn to play
 		{
 			if(who=='c')
@@ -220,6 +280,11 @@ public class TicTacToe {
 				who='c';
 				System.out.println("Computers turn to play");
 			}		
+		}
+        if(winner=="draw")								//condition to check for tie
+		{
+			System.out.println( "It's a draw!");
+			System.exit(0);
 		}
     }
 	
@@ -242,10 +307,12 @@ public class TicTacToe {
 			}
 		getInput();   //function call as to enter either 'X' or 'O'
 		displayBoard(); //function call to display board
-		System.out.println("Enter the cell number (1 to 9) to make the move: ");
+		if(who=='p')
+			System.out.println("Enter the cell number (1 to 9) to make the move: ");
 		setLocation();	//function call to select the index value to store X OR O
-		checkSpace(); 	//function call to check for valid space
-		winnerExists();							//@method to check if someone won
+		if(who=='p')
+			checkSpace(); 	//function call to check for valid space
+		winnerExists();		//function call to check for winner
 		}
 	}
 
