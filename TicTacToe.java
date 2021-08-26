@@ -9,6 +9,8 @@ public class TicTacToe {
 			
 	public static Random rand=new Random();			//random class instance to get a random value
 	
+	public static int start = 0;					//to start a new game
+	
 	public static char letter; 						//to store input X or O
 	
 	public static char who; 			//this variable checks whose turn to play either 'p'-player or 'c'-computer
@@ -148,7 +150,10 @@ public class TicTacToe {
 		displayBoard();
 	}
 	
-	
+	/*@method contains various conditions to occupy desirable space for computer
+	 * selects corner cells if available
+	 * if none of conditions take a space then alternatively random cell is taken 
+	 */
 	public static void cTurn()
 	{
 		System.out.println("Computers turn!");
@@ -236,7 +241,7 @@ public class TicTacToe {
 		}
 	   	else {
 	   		int noRandom=0;
-			for(int i=0;i<5;i++)						//checks if any corner space & lastly center space are available
+			for(int i=0;i<5;i++)						//checks if any corner space & lastly center space are available to occupy
 			{
 				if(board[corner_list[i]]==' ')
 				{
@@ -245,7 +250,7 @@ public class TicTacToe {
 					break;
 				}
 			}
-			if(noRandom==0)								//checks center space is available to occupy
+			if(noRandom==0)								
 			{
 					randomSelect();
 			}
@@ -321,10 +326,10 @@ public class TicTacToe {
         if(winner=="yes")						//condition to check for winner
 		{
 			System.out.println("Winner is: "+winnerIs());
-			System.exit(0);
+			anotherGame();
 		}
         else if(i==10) {
-        	winner="draw";	
+        	winner="draw";
         }
         
 		else													//if none of conditions determine the winner then change the turn to play
@@ -343,7 +348,7 @@ public class TicTacToe {
         if(winner=="draw")								//condition to check for tie
 		{
 			System.out.println( "It's a draw!");
-			System.exit(0);
+			anotherGame();
 		}
     }
 	
@@ -355,23 +360,50 @@ public class TicTacToe {
 			return "Player";
 	}
 	
+	/*@method to start a new game
+	 * we can start a new game or exit the program
+	 * start and winner variables set to default
+	 */
+	public static void anotherGame()
+    {
+    	System.out.println("Ready for anoher game?\n1.press 1 to start\n2.press any key to exit");
+    	int ch = sc.nextInt();
+    	if(ch == 1)
+    	{
+    		start=0;				//assign start to 0 for a new game to be played right from the toss
+    		winner="no";			//set winner to "no"(default) since it is static
+    	}
+    	else {
+    		System.exit(0);
+    	}
+    	
+    }
+	
+	/*main method
+	 * entry point to the tic tac toe program
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int start = 0;
+		
 		while(winner != "yes" || winner != "draw") {
 			if(start ==0) {
-		createBoard();	//function call to createBoard
-		doToss();		//function call to do a toss
-		start = 1;
+				createBoard();	//function call to createBoard
+				doToss();		//function call to do a toss
+				start = 1;
 			}
-		getInput();   //function call as to enter either 'X' or 'O'
-		displayBoard(); //function call to display board
-		if(who=='p')
-			System.out.println("Enter the cell number to make the move (from 1 TO 9): ");
-		setLocation();	//function call to select the index value to store X OR O
-		if(who=='p')
-			checkSpace(); 	//function call to check for valid space
-		winnerExists();		//function call to check for winner
+			getInput();   //function call as to enter either 'X' or 'O'
+			
+			displayBoard(); //function call to display board
+			
+			if(who=='p')
+				System.out.println("Enter the cell number to make the move (from 1 TO 9): ");
+			
+			setLocation();	//function call to select the index value to store X OR O
+			
+			if(who=='p')
+				checkSpace(); 	//function call to check for valid space
+			
+			winnerExists();		//function call to check for winner
 		}
 	}
 
