@@ -245,9 +245,14 @@ public class TicTacToe {
 					break;
 				}
 			}
-			if(noRandom==0)
+			if(noRandom==0)								//checks center space is available to occupy
 			{
-				randomSelect();
+				if(board[5] == ' ') {
+					board[5] = letter;
+				}
+				else {
+					randomSelect();
+				}
 			}
 		}
 		displayBoard();
