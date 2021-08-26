@@ -45,12 +45,12 @@ public class TicTacToe {
 		int toss_output=rand.nextInt(2);						
 		if(player_choice==toss_output)
 		{
-			System.out.println("Its player's turn!!!");
+			System.out.println("Player won the toss!");
 			who='p';
 		}
 		else
 		{
-			System.out.println("Its computer's turn!!!");
+			System.out.println("Computer won the toss!");
 			who='c';
 		}
 		
@@ -151,7 +151,15 @@ public class TicTacToe {
 	
 	public static void cTurn()
 	{
-		System.out.println("Computer is playing!!!");	
+		System.out.println("Computers turn!");
+		char playerInput;
+		
+		if(letter == 'X')
+			playerInput='O';
+		else
+			playerInput='X';
+		
+		
 		if((board[1]==' ')&&(board[2]==board[3]&&board[2]==letter)||(board[4]==board[7]&&board[4]==letter)||(board[5]==board[9]&&board[5]==letter))
 		{
 			board[1]=letter;			
@@ -178,7 +186,7 @@ public class TicTacToe {
 		}
 		else if((board[7]==' ')&&(board[1]==board[4]&&board[4]==letter)||(board[3]==board[5]&&board[3]==letter)||(board[8]==board[9]&&board[8]==letter))
 		{
-			board[3]=letter;
+			board[7]=letter;
 		}
 		else if((board[8]==' ')&&(board[9]==board[7]&&board[7]==letter)||(board[2]==board[5]&&board[2]==letter))
 		{
@@ -186,6 +194,43 @@ public class TicTacToe {
 		}
 		else if((board[9]==' ')&&(board[1]==board[5]&&board[5]==letter)||(board[6]==board[3]&&board[3]==letter)||(board[8]==board[7]&&board[7]==letter))
 		{
+			board[9]=letter;
+		}
+	
+		else if((board[1]==' ')&&(board[2]==board[3]&&board[2]==playerInput)||(board[4]==board[7]&&board[4]==playerInput)||(board[5]==board[9]&&board[5]==playerInput))
+		{
+			board[1]=letter;	
+		}
+		else if((board[2]==' ')&&(board[1]==board[3]&&board[3]==playerInput)||(board[5]==board[8]&&board[8]==playerInput))
+		{
+			board[2]=letter;
+		}
+		else if((board[3]==' ')&&(board[1]==board[2]&&board[2]==playerInput)||(board[6]==board[9]&&board[9]==playerInput)||(board[5]==board[7]&&board[7]==playerInput))
+		{
+			board[3]=letter;
+		}
+		else  if((board[4]==' ')&&(board[1]==board[7]&&board[1]==playerInput)||(board[5]==board[6]&&board[6]==playerInput))
+		{
+			board[4]=letter;
+		}	
+		else if((board[5]==' ')&&(board[1]==board[9]&&board[2]==playerInput)||(board[7]==board[3]&&board[7]==playerInput)||(board[2]==board[8]&&board[8]==playerInput)||(board[4]==board[6]&&board[6]==playerInput))
+		{
+			board[5]=letter;
+		}
+		else if((board[6]==' ')&&(board[9]==board[3]&&board[3]==playerInput)||(board[5]==board[4]&&board[4]==playerInput))
+		{
+			board[6]=letter;
+		}
+		else 	if((board[7]==' ')&&(board[1]==board[4]&&board[4]==playerInput)||(board[6]==board[9]&&board[9]==playerInput)||(board[5]==board[7]&&board[7]==playerInput))
+		{
+			board[7]=letter;
+		}
+		else if((board[8]==' ')&&(board[9]==board[7]&&board[7]==playerInput)||(board[2]==board[5]&&board[2]==playerInput))
+		{
+			board[8]=letter;
+		}
+		else if((board[9]==' ')&&(board[1]==board[5]&&board[5]==playerInput)||(board[6]==board[3]&&board[3]==playerInput)||(board[8]==board[7]&&board[7]==playerInput))
+		{	
 			board[9]=letter;
 		}
 	   	else {
@@ -308,7 +353,7 @@ public class TicTacToe {
 		getInput();   //function call as to enter either 'X' or 'O'
 		displayBoard(); //function call to display board
 		if(who=='p')
-			System.out.println("Enter the cell number (1 to 9) to make the move: ");
+			System.out.println("Enter the cell number to make the move (from 1 TO 9): ");
 		setLocation();	//function call to select the index value to store X OR O
 		if(who=='p')
 			checkSpace(); 	//function call to check for valid space
