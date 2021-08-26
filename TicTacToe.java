@@ -153,7 +153,7 @@ public class TicTacToe {
 	{
 		System.out.println("Computers turn!");
 		char playerInput;
-		int corner_list[]= {1,3,7,9};		//contains corner numbers
+		int corner_list[]= {1,3,7,9,5};		//contains corner numbers
 		
 		if(letter == 'X')
 			playerInput='O';
@@ -236,7 +236,7 @@ public class TicTacToe {
 		}
 	   	else {
 	   		int noRandom=0;
-			for(int i=0;i<4;i++)						//checks if any corner space is available
+			for(int i=0;i<5;i++)						//checks if any corner space & lastly center space are available
 			{
 				if(board[corner_list[i]]==' ')
 				{
@@ -247,12 +247,7 @@ public class TicTacToe {
 			}
 			if(noRandom==0)								//checks center space is available to occupy
 			{
-				if(board[5] == ' ') {
-					board[5] = letter;
-				}
-				else {
 					randomSelect();
-				}
 			}
 		}
 		displayBoard();
